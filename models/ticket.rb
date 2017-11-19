@@ -64,14 +64,14 @@ class Ticket
   end
 
 
-  def films
-    sql = "SELECT *
-          FROM films
-          WHERE id = $1"
-    values = [@films_id]
-    result = SqlRunner.run(sql,values)[0]
-    return Film.new(result)
-  end
+  # def films
+  #   sql = "SELECT *
+  #         FROM films
+  #         WHERE id = $1"
+  #   values = [@films_id]
+  #   result = SqlRunner.run(sql,values)[0]
+  #   return Film.new(result)
+  # end
 
   def customers
     sql = "SELECT *

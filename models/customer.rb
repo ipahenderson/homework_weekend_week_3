@@ -80,4 +80,8 @@ class Customer
     self.update
   end
 
+  def tickets_count
+    return self.films.count
+  end
+
 end
