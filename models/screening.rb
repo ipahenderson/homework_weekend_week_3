@@ -73,7 +73,14 @@ class Screening
     return Film.new(result)
   end
 
+  def seats_free?
+    @empty_seats >= 1
+  end
+
   def sell_ticket(customer, screening)
+    if screening.seats_free? == false
+      return "No seats left"
+    else
     ticket = Ticket.new(
       {
         'customer_id' => customer.id,
@@ -82,7 +89,18 @@ class Screening
         }
       )
     ticket.save
+    end
   end
 
+  def self.most_popular
+    sql = "
+     SELECT screening_id, COUNT(screening_id) FROM tickets
+     GROUP BY screening_id
+     ORDER BY count DESC
+     "
+    result = SqlRunner.run(sql)[0]
+    most_popular = result['screening_id'].to_i
+    Screening.find(most_popular)
+  end
 
 end

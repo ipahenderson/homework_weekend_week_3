@@ -32,7 +32,7 @@ class Ticket
   def self.all()
     sql = "SELECT * FROM tickets"
     tickets = SqlRunner.run(sql)
-    return tickets.map {|ticket| Tickets.new(ticket)}
+    return tickets.map {|ticket| Ticket.new(ticket)}
   end
 
 
@@ -63,15 +63,6 @@ class Ticket
     return result.map{|find| Ticket.new(find)}
   end
 
-
-  # def films
-  #   sql = "SELECT *
-  #         FROM films
-  #         WHERE id = $1"
-  #   values = [@films_id]
-  #   result = SqlRunner.run(sql,values)[0]
-  #   return Film.new(result)
-  # end
 
   def customers
     sql = "SELECT *
