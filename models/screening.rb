@@ -38,7 +38,7 @@ class Screening
 
   def update
     sql = "UPDATE screenings
-    SET (film_id, start_time) = ($1, $2, $3)
+    SET (film_id, start_time, empty_seats) = ($1, $2, $3)
     WHERE id = $4"
     values = [@film_id, @start_time, @empty_seats, @id]
     SqlRunner.run(sql,values)
@@ -89,6 +89,8 @@ class Screening
         }
       )
     ticket.save
+    screening.empty_seats -= 1
+    self.update
     end
   end
 
